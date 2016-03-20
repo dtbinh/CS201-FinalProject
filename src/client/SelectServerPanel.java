@@ -73,6 +73,7 @@ public class SelectServerPanel extends JPanel {
 		/* Add the centerPanel to the center (vertically and horizontally) of the JLabel */
 		bgLabel.add(centerPanel, new GridBagConstraints());
 		add(bgLabel);
+		//test
 	}
 	
 	public HubButton getButton() {
