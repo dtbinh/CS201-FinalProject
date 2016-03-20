@@ -50,7 +50,7 @@ public class SelectServerPanel extends JPanel {
 		centerPanel.setLayout(null);
 		/* The components inside the center panel are placed by pixels,
 		 * OK because user can't resize smaller than 1100x699 */
-		serverComboBox.setText("Select Server");
+		serverComboBox.setText("Select School Server");
 		serverComboBox.setBounds(0, 115, 310, 50);
 		clubComboBox.setText("Select Club");
 		clubComboBox.setBounds(0, 173, 310, 50);
