@@ -41,6 +41,7 @@ public class SelectServerPanel extends JPanel {
 		selectServerButton = new HubButton(Constants.SELECT_SERVER_TEXT, ThemeColors.LOGIN_COLOR, ThemeColors.LOGIN_HIGHLIGHT_COLOR);
 		centerPanel = new JPanel();		
 		buttonBox = new JPanel();
+		
 	}
 	
 	private void createGUI() {
