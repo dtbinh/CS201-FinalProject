@@ -47,10 +47,7 @@ public class HubComboBox<T> extends JComboBox<T> {
 			g2d.drawString(text, 10, textBottom);
 			g2d.setRenderingHints(hints);
 			g.setFont(prev);
-			g.setColor(prevColor);
-<<<<<<< HEAD
-		} 
-=======
+			g.setColor(prevColor); 
 		} else {
 			String selectedIndex = (String) this.getSelectedItem();
 			int height = this.getHeight();
@@ -67,6 +64,5 @@ public class HubComboBox<T> extends JComboBox<T> {
 			g.setFont(prev);
 			g.setColor(prevColor);
 		}
->>>>>>> 32be5bc9f5fe0f1ea85468ac130426f84f1c63c8
 	}
 }
