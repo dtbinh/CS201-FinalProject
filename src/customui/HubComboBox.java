@@ -32,7 +32,6 @@ public class HubComboBox<T> extends JComboBox<T> {
 	protected void paintComponent(Graphics g) {
 		g.drawImage(mBackgroundImage, 0, 0, getWidth(), getHeight(), null);
 		if (this.getSelectedIndex() == -1) {
-			int width = this.getWidth();
 			int height = this.getHeight();
 			Font prev = g.getFont();
 			Font italic = prev.deriveFont(Font.ITALIC);
@@ -46,6 +45,21 @@ public class HubComboBox<T> extends JComboBox<T> {
 			RenderingHints hints = g2d.getRenderingHints();
 			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			g2d.drawString(text, 10, textBottom);
+			g2d.setRenderingHints(hints);
+			g.setFont(prev);
+			g.setColor(prevColor);
+		} else {
+			String selectedIndex = (String) this.getSelectedItem();
+			int height = this.getHeight();
+			Font prev = g.getFont();
+			Color prevColor = g.getColor();
+			g.setColor(Color.BLACK);
+			int h = g.getFontMetrics().getHeight();
+			int textBottom = (height - h) / 2 + h - 4;
+			Graphics2D g2d = (Graphics2D) g;
+			RenderingHints hints = g2d.getRenderingHints();
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			g2d.drawString(selectedIndex, 10, textBottom);
 			g2d.setRenderingHints(hints);
 			g.setFont(prev);
 			g.setColor(prevColor);
