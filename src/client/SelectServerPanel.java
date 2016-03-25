@@ -5,6 +5,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -24,6 +31,7 @@ public class SelectServerPanel extends JPanel {
 	private HubComboBox<String> clubComboBox, serverComboBox;
 	private HubButton selectServerButton;
 	private JPanel centerPanel, buttonBox;
+	private File serverFile;
 	
 	public SelectServerPanel() {
 		setLayout(new BorderLayout());
@@ -32,6 +40,34 @@ public class SelectServerPanel extends JPanel {
 		createGUI();
 	}
 	
+	//Reads the list of all available hosts into the combo box
+	private void populateServerComboBox() throws IOException {
+		serverFile= new File(Constants.SERVERS_FILE);
+		BufferedReader br =  null;
+		try{
+			br = new BufferedReader(new FileReader(serverFile));
+			int i = 0;
+			String s;
+			while((s = br.readLine()) != null)
+			{
+				serverComboBox.insertItemAt(s, i);
+				//System.out.println(s);
+				i++;
+			}	
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("fnfe: " + fnfe.getMessage());
+		} finally {
+			if(br != null)
+			{
+				try {
+					br.close();
+				} catch (IOException ioe){
+					System.out.println(ioe.getMessage());
+				}
+			}
+			
+		}
+	}
 	private void instantiateComponents() {	
 		bg = ImageLibrary.getImage(Constants.SPLASH_IMAGE);
 		/* scalableLabel is a JLabel */
@@ -52,7 +88,13 @@ public class SelectServerPanel extends JPanel {
 		/* The components inside the center panel are placed by pixels,
 		 * OK because user can't resize smaller than 1100x699 */
 		serverComboBox.setText("Select School Server");
+		try {
+			populateServerComboBox();
+		} catch (IOException e) {
+			e.getMessage();
+		}
 		serverComboBox.setBounds(0, 115, 310, 50);
+		addActions();
 		clubComboBox.setText("Select Club");
 		clubComboBox.setBounds(0, 173, 310, 50);
 		Image img = ImageLibrary.getScaledImage(ImageLibrary.getImage(Constants.SPLASH_LOGO), 310, 85);
@@ -75,9 +117,23 @@ public class SelectServerPanel extends JPanel {
 		bgLabel.add(centerPanel, new GridBagConstraints());
 		add(bgLabel);
 	}
-	
+	private void addActions() {
+		serverComboBox.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent ae){
+				String selected = (String)serverComboBox.getSelectedItem();
+				System.out.println(selected);
+				serverComboBox.setText(selected);
+				serverComboBox.revalidate();
+				serverComboBox.repaint();
+			}
+		});
+	}
 	public HubButton getButton() {
 		return selectServerButton;
+	}
+	public String getSelectedServer()
+	{
+		return (String)serverComboBox.getSelectedItem();
 	}
 }
 	

@@ -10,4 +10,5 @@ public class Constants {
 	
 	static String USERNAME_TEXT = "Username";
 	static String PASSWORD_TEXT = "Password";
+	static String SERVERS_FILE = "src/servers.txt";
 }

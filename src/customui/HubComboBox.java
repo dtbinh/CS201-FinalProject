@@ -1,4 +1,4 @@
-package customui;
+	package customui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -49,6 +49,6 @@ public class HubComboBox<T> extends JComboBox<T> {
 			g2d.setRenderingHints(hints);
 			g.setFont(prev);
 			g.setColor(prevColor);
-		}
+		} 
 	}
 }
